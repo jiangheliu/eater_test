@@ -64,9 +64,49 @@ function rate($num, $max) {
     }
 }
 
+// 获取概率数据
+function getRate($rates) {
+    $sum = 0;
+    $formatRates = array();
+    foreach ($rates as $key => $rate) {
+        $from = $sum + 1;
+        $sum += $rate;
+        $formatRates[$key] = array($from, $sum);
+    }
+    $max = $sum;
+    return array($formatRates, $max);
+}
+
 // curl请求
 function curlGet($url, $data) {
+    $url = '';
 
+}
+
+// 整数发红包算法
+function redPacket($money, $num) {
+    $total = 0;
+    $arr = array();
+
+    // 随机出
+    for ($i = 1; $i < $num; $i++) {
+        if ($i == 1) {
+            $total = $money;
+        }
+
+        // 避免出现红包里没钱
+        $rand = rand(1, $total - 1);
+        if ($rand > $total / 2) {
+            $rand = $total - $rand;
+        }
+
+        $arr[] = $rand;
+        $total -= $rand;
+    }
+
+    $end = $money - array_sum($arr);
+    $arr[] = $end;
+    var_dump($arr);
 }
 
 // curl请求
@@ -82,11 +122,25 @@ function version($baseVersion, $compareVersion) {
 
 // 登陆
 function login($userName, $passport) {
+    $user = array(); // 根据传入的参数查找对应用户
 
+    if (empty($user)) {
+        return false;
+    }
+
+
+    if ($user['passport'] != $passport) {
+        return false;
+    }
+
+    // 登录数据记录日志
+
+    return true;
 }
 
 // 校验数据
 function check() {
+    // 检验对比玩家数据，提取对应的用户数据
 
 }
 
