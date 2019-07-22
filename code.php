@@ -144,3 +144,31 @@ function check() {
 
 }
 
+// 生成不重复数字的验证码
+function createCode($num) {
+    $codeArr = range(0, 9);
+    $code = array_rand($codeArr, $num);
+    shuffle($code);
+
+    $roomPassport = implode('', $code);
+    var_dump($roomPassport);
+}
+
+
+// 获取数组最大深度
+function deep($arr) {
+    $max = 0;
+    if (!is_array($arr)) {
+        return $max;
+    }
+    foreach ($arr as $value) {
+        if (is_array($value)) {
+            $depth = deep($value) + 1;
+            if ($depth > $max) {
+                $max = $depth;
+            }
+        }
+    }
+    return $max;
+}
+
