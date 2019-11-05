@@ -172,3 +172,23 @@ function deep($arr) {
     return $max;
 }
 
+// 非断点调试
+function debug($str) {
+    echo '<pre>';
+    print_r($str);
+    echo '</pre>';
+}
+
+// 断点调试
+function dd($str) {
+    echo '<pre>';
+    print_r($str);
+    echo '</pre>';
+    die();
+}
+
+
+// 快速排序
+function quickSort() {
+
+}
