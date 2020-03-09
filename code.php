@@ -78,9 +78,20 @@ function getRate($rates) {
 }
 
 // curl请求
-function curlGet($url, $data) {
-    $url = '';
+function curlGet($url) {
+    $curl = curl_init();
 
+    $options = array(
+        CURLOPT_URL => $url,
+        CURLOPT_HEADER => 0,
+        CURLOPT_RETURNTRANSFER => 1,
+        CURLOPT_USERAGENT => 'Mozilla/5.0',
+    );
+    curl_setopt_array($curl, $options);
+
+    $result = curl_exec($curl);
+    curl_close($curl);
+    return $result;
 }
 
 // 整数发红包算法
@@ -111,7 +122,16 @@ function redPacket($money, $num) {
 
 // curl请求
 function curlPost($url, $data) {
-
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_POST, 1);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/5.0');
+    curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-type:application/json; charset=utf-8']);
+    $result = curl_exec($curl);
+    curl_close($curl);
+    return $result;
 }
 
 
